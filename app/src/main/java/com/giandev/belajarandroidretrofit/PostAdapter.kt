@@ -25,6 +25,9 @@ class PostAdapter(private val listPost: List<PostResponse>) :
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val post = listPost[position]
-        holder.binding.textViewTitle.text = "id: ${post.id}\n title: ${post.title} \n ${post.body}"
+        holder.binding.textViewId.text = "id: ${post.id}"
+        holder.binding.textViewUserId.text = "userID: ${post.userId}"
+        holder.binding.textViewTitle.text = post.title
+        holder.binding.textViewBody.text = post.body
     }
 }
