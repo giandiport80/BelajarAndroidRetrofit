@@ -1,4 +1,4 @@
-package com.giandev.belajarandroidretrofit
+package com.giandev.belajarandroidretrofit.response
 
 import com.google.gson.annotations.SerializedName
 

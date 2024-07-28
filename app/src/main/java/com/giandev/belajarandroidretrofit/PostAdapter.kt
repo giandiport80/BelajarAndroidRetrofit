@@ -1,11 +1,10 @@
 package com.giandev.belajarandroidretrofit
 
-import android.annotation.SuppressLint
-import android.content.Context
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.giandev.belajarandroidretrofit.databinding.ItemPostBinding
+import com.giandev.belajarandroidretrofit.response.PostResponse
 
 class PostAdapter(private val listPost: List<PostResponse>) :
     RecyclerView.Adapter<PostAdapter.ViewHolder>() {
