@@ -28,7 +28,10 @@ class MainActivity : AppCompatActivity() {
 //        showListPostWithQueryMap()
 //        createPost()
 //        showComments()
-        showCommentsWithUrl()
+//        showCommentsWithUrl()
+
+//        updatePutPost()
+        updatePatchPost()
     }
 
     private fun showComments() {
@@ -207,4 +210,75 @@ class MainActivity : AppCompatActivity() {
             }
         })
     }
+
+    private fun updatePutPost() {
+        RetrofitClient.instance.putPost(
+            id = 5,
+            userId = 4,
+            idField = 5,
+            title = null,
+            body = "hello body"
+        )
+            .enqueue(
+                object : Callback<PostResponse> {
+                    override fun onResponse(
+                        call: Call<PostResponse>,
+                        response: Response<PostResponse>
+                    ) {
+                        Log.d("RETROFIT_RESPONSE", response.isSuccessful.toString())
+
+                        if (response.isSuccessful) {
+                            binding.textViewHeaderTitle.text = response.code().toString()
+                            response.body()?.toString()?.let { Log.d("RETROFIT_BODY", it) }
+                            Toast.makeText(
+                                applicationContext,
+                                "Berhasil update data",
+                                Toast.LENGTH_SHORT
+                            ).show()
+                        }
+                    }
+
+                    override fun onFailure(call: Call<PostResponse>, t: Throwable) {
+                        binding.textViewHeaderTitle.text = t.message
+
+                    }
+
+                })
+    }
+
+    private fun updatePatchPost() {
+        RetrofitClient.instance.patchPost(
+            id = 5,
+            userId = 4,
+            idField = 5,
+            title = "hello",
+            body = "hello body"
+        )
+            .enqueue(
+                object : Callback<PostResponse> {
+                    override fun onResponse(
+                        call: Call<PostResponse>,
+                        response: Response<PostResponse>
+                    ) {
+                        Log.d("RETROFIT_RESPONSE", response.isSuccessful.toString())
+
+                        if (response.isSuccessful) {
+                            binding.textViewHeaderTitle.text = response.code().toString()
+                            response.body()?.toString()?.let { Log.d("RETROFIT_BODY", it) }
+                            Toast.makeText(
+                                applicationContext,
+                                "Berhasil update data",
+                                Toast.LENGTH_SHORT
+                            ).show()
+                        }
+                    }
+
+                    override fun onFailure(call: Call<PostResponse>, t: Throwable) {
+                        binding.textViewHeaderTitle.text = t.message
+
+                    }
+
+                })
+    }
+
 }

@@ -6,7 +6,9 @@ import retrofit2.Call
 import retrofit2.http.Field
 import retrofit2.http.FormUrlEncoded
 import retrofit2.http.GET
+import retrofit2.http.PATCH
 import retrofit2.http.POST
+import retrofit2.http.PUT
 import retrofit2.http.Path
 import retrofit2.http.Query
 import retrofit2.http.QueryMap
@@ -41,4 +43,24 @@ interface Api {
 
     @GET
     fun getCommentsWithUrl(@Url url: String): Call<List<CommentResponse>>
+
+    @FormUrlEncoded
+    @PUT("posts/{id}")
+    fun putPost(
+        @Path("id") id: Int,
+        @Field("id") idField: Int,
+        @Field("userId") userId: Int,
+        @Field("title") title: String?,
+        @Field("body") body: String?,
+    ): Call<PostResponse>
+
+    @FormUrlEncoded
+    @PATCH("posts/{id}")
+    fun patchPost(
+        @Path("id") id: Int,
+        @Field("id") idField: Int,
+        @Field("userId") userId: Int,
+        @Field("title") title: String,
+        @Field("body") body: String?,
+    ): Call<PostResponse>
 }
