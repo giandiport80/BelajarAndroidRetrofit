@@ -3,6 +3,7 @@ package com.giandev.belajarandroidretrofit
 import com.giandev.belajarandroidretrofit.response.CommentResponse
 import com.giandev.belajarandroidretrofit.response.PostResponse
 import retrofit2.Call
+import retrofit2.http.DELETE
 import retrofit2.http.Field
 import retrofit2.http.FormUrlEncoded
 import retrofit2.http.GET
@@ -63,4 +64,7 @@ interface Api {
         @Field("title") title: String,
         @Field("body") body: String?,
     ): Call<PostResponse>
+
+    @DELETE("posts/{id}")
+    fun deletePost(@Path("id") id: Int): Call<Void>
 }

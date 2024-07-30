@@ -31,7 +31,9 @@ class MainActivity : AppCompatActivity() {
 //        showCommentsWithUrl()
 
 //        updatePutPost()
-        updatePatchPost()
+//        updatePatchPost()
+
+        deletePost()
     }
 
     private fun showComments() {
@@ -281,4 +283,23 @@ class MainActivity : AppCompatActivity() {
                 })
     }
 
+    private fun deletePost() {
+        RetrofitClient.instance.deletePost(1).enqueue(object : Callback<Void> {
+            override fun onResponse(call: Call<Void>, response: Response<Void>) {
+                if (response.isSuccessful) {
+                    binding.textViewHeaderTitle.text = response.code().toString()
+                    Toast.makeText(
+                        applicationContext,
+                        "Berhasil menghapus data",
+                        Toast.LENGTH_SHORT
+                    ).show()
+                }
+            }
+
+            override fun onFailure(p0: Call<Void>, p1: Throwable) {
+                binding.textViewHeaderTitle.text = p1.message
+            }
+
+        })
+    }
 }
